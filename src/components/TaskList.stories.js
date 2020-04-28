@@ -2,11 +2,12 @@ import React from 'react';
 
 import { PureTaskList } from './TaskList';
 import { taskData, actionsData } from './Task.stories';
+import { withKnobs, object } from '@storybook/addon-knobs/react';
 
 export default {
   component: PureTaskList,
   title: 'TaskList',
-  decorators: [story => <div style={{ padding: '3rem' }}>{story()}</div>],
+  decorators: [withKnobs, story => <div style={{ padding: '3rem' }}>{story()}</div>],
   excludeStories: /.*Data$/,
 };
 
@@ -24,10 +25,10 @@ export const withPinnedTasksData = [
   { id: '6', title: 'Task 6 (pinned)', state: 'TASK_PINNED' },
 ];
 
-export const Default = () => <PureTaskList tasks={defaultTasksData} {...actionsData} />;
+export const Default = () => <PureTaskList tasks={object('PureTaskList', defaultTasksData)} {...actionsData} />;
 
-export const WithPinnedTasks = () => <PureTaskList tasks={withPinnedTasksData} {...actionsData} />;
+export const WithPinnedTasks = () => <PureTaskList tasks={object('PureTaskList', withPinnedTasksData)} {...actionsData} />;
 
-export const Loading = () => <PureTaskList loading tasks={[]} {...actionsData} />;
+export const Loading = () => <PureTaskList loading tasks={object('PureTaskList', [])} {...actionsData} />;
 
-export const Empty = () => <PureTaskList tasks={[]} {...actionsData} />;
+export const Empty = () => <PureTaskList tasks={object('PureTaskList', [])} {...actionsData} />;
